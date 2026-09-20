@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朝美穗香作品 - 完整影视作品列表与演艺生涯资料库</title>
+    <meta name="description" content="朝美穗香作品资料库。收录朝美穗香出演的日剧、电影、综艺节目及写真作品，包含作品年份、类型简介及观看指南。">
+    <meta name="keywords" content="朝美穗香作品, 朝美穂香, 日剧, 日本电影, 综艺节目, 演艺生涯">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #e91e63;
+            --primary-hover: #d81b60;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --bg-body: #f9f9f9;
+            --bg-card: #ffffff;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-card);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #2c003e;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #4a148c;
+            margin-bottom: 30px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .stat-item strong {
+            display: block;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .stat-item span {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Main Content */
+        main {
+            max-width: var(--container-width);
+            margin: -40px auto 40px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--bg-card);
+            border: 1px solid #eee;
+            padding: 10px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Grid Layout */
+        .grid-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 24px;
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .work-card {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .work-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.15);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 350px;
+            background-color: #e0e0e0;
+            position: relative;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 15px;
+        }
+
+        .genre-tag {
+            font-size: 0.8rem;
+            background: #fce4ec;
+            color: var(--primary-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* Biography Section */
+        .bio-section {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .bio-img {
+            flex-shrink: 0;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #fce4ec;
+        }
+
+        .bio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bio-text h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .bio-text p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: #aaa;
+            padding: 60px 20px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .bio-section { flex-direction: column; text-align: center; }
+            .bio-text p { text-align: left; }
+            .nav-container { padding: 0 15px; }
+            nav ul { gap: 15px; }
+            nav a { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-container">
+        <div class="logo">MioHoshino<span style="color:var(--text-main); font-weight:400;">DB</span></div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">全部作品</a></li>
+                <li><a href="#">日剧</a></li>
+                <li><a href="#">电影</a></li>
+                <li><a href="#">写真</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>朝美穗香作品</h1>
+        <p>全方位收录日本艺人朝美穗香（ほしなみおか）的演艺生涯重要作品与影视资料。</p>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <strong>50+</strong>
+                <span>参演影视</span>
+            </div>
+            <div class="stat-item">
+                <strong>4</strong>
+                <span>主演日剧</span>
+            </div>
+            <div class="stat-item">
+                <strong>2012</strong>
+                <span>出道年份</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<main>
+    <!-- Filter -->
+    <div class="filter-tabs">
+        <button class="tab-btn active">全部</button>
+        <button class="tab-btn">日剧</button>
+        <button class="tab-btn">电影</button>
+        <button class="tab-btn">综艺</button>
+        <button class="tab-btn">杂志写真</button>
+    </div>
+
+    <!-- Featured Works -->
+    <section class="grid-section">
+        <h2 class="section-title">精选作品</h2>
+        <div class="works-grid">
+            <!-- Card 1 -->
+            <article class="work-card">
+                <div class="card-image">
+                    <img src="https://picsum.photos/seed/hoshino1/400/500" alt="朝美穗香">
+                    <span class="card-badge">电影</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span>2019</span>
+                        <span class="genre-tag">剧情</span>
+                    </div>
+                    <h3 class="card-title">《无法成为野兽的我们》</h3>
+                    <p class="card-desc">朝美穗香饰演职场精英筱原美树，与永野芽郁、松坂桃李合作，展现成熟女性的职场与情感生活。</p>
+                    <div class="card-footer">
+                        <span style="font-size:0.8rem; color:#999;">豆瓣评分 8.1</span>
+                        <a href="#" style="color:var(--primary-color); font-size:0.9rem; font-weight:600;">详情 &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="work-card">
+                <div class="card-image">
+                    <img src="https://picsum.photos/seed/hoshino2/400/500" alt="朝美穗香">
+                    <span class="card-badge">日剧</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span>2018</span>
+                        <span class="genre-tag">爱情</span>
+                    </div>
+                    <h3 class="card-title">《大叔的爱》</h3>
+                    <p class="card-desc">饰演特摄剧《假面骑士Ex-Aid》女主角神原春，因角色热度极高而广为人知。</p>
+                    <div class="card-footer">
+                        <span style="font-size:0.8rem; color:#999;">豆瓣评分 8.3</span>
+                        <a href="#" style="color:var(--primary-color); font-size:0.9rem; font-weight:600;">详情 &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="work-card">
+                <div class="card-image">
+                    <img src="https://picsum.photos/seed/hoshino3/400/500" alt="朝美穗香">
+                    <span class="card-badge">综艺</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span>2016-2017</span>
+                        <span class="genre-tag">脱口秀</span>
+                    </div>
+                    <h3 class="card-title">《有吉之壁》</h3>
+                    <p class="card-desc">作为新人艺人参加该综艺，展现了独特的吐槽风格和综艺感，成功打入主流市场。</p>
+                    <div class="card-footer">
+                        <span style="font-size:0.8rem; color:#999;">人气综艺</span>
+                        <a href="#" style="color:var(--primary-color); font-size:0.9rem; font-weight:600;">详情 &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="work-card">
+                <div class="card-image">
+                    <img src="https://picsum.photos/seed/hoshino4/400/500" alt="朝美穗香">
+                    <span class="card-badge">写真</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span>2020</span>
+                        <span class="genre-tag">时尚</span>
+                    </div>
+                    <h3 class="card-title">《朝美穗香写真集》</h3>
+                    <p class="card-desc">以“Mio”为概念拍摄的时尚写真集，记录了出道以来不同阶段的成长与蜕变。</p>
+                    <div class="card-footer">
+                        <span style="font-size:0.8rem; color:#999;">Oricon榜单</span>
+                        <a href="#" style="color:var(--primary-color); font-size:0.9rem; font-weight:600;">详情 &rarr;</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Biography -->
+    <section class="bio-section">
+        <div class="bio-img">
+            <img src="https://picsum.photos/seed/hoshino_avatar/300/300" alt="朝美穗香">
+        </div>
+        <div class="bio-text">
+            <h2>关于朝美穗香</h2>
+            <p>朝美穗香（ほしな みおか，Hoshina Mio），1997年12月16日出生于日本东京。2012年以“Hoshina Mio”名义作为歌手出道，随后转型为演员。</p>
+            <p>她因出演特摄剧《假面骑士Ex-Aid》中的女主角神原春一角而广受关注。随后在《无法成为野兽的我们》中饰演职场精英筱原美树，展现了不俗的演技。朝美穗香不仅活跃于影视圈，还经常参与综艺节目和时尚杂志拍摄，是一位多才多艺的艺人。</p>
+            <p>她的演艺生涯始于偶像团体，后逐渐转型为实力派演员，深受年轻观众喜爱。</p>
+        </div>
+    </section>
+
+    <!-- Early Works List -->
+    <section class="grid-section">
+        <h2 class="section-title">早期作品列表</h2>
+        <div class="works-grid">
+            <article class="work-card">
+                <div class="card-content">
+                    <div class="card-title">《只有我不存在的城市》</div>
+                    <div class="card-meta"><span>2018</span> <span class="genre-tag">悬疑</span></div>
+                    <p class="card-desc">饰演配角，展现了细腻的表演。</p>
+                </div>
+            </article>
+            <article class="work-card">
+                <div class="card-content">
+                    <div class="card-title">《三明治女孩的逆袭》</div>
+                    <div class="card-meta"><span>2017</span> <span class="genre-tag">喜剧</span></div>
+                    <p class="card-desc">出演早期日剧，积累了丰富经验。</p>
+                </div>
+            </article>
+            <article class="work-card">
+                <div class="card-content">
+                    <div class="card-title">《草莓牛奶》</div>
+                    <div class="card-meta"><span>2015</span> <span class="genre-tag">校园</span></div>
+                    <p class="card-desc">出道初期的代表性作品。</p>
+                </div>
+            </article>
+            <article class="work-card">
+                <div class="card-content">
+                    <div class="card-title">《天使与恶魔》</div>
+                    <div class="card-meta"><span>2014</span> <span class="genre-tag">恋爱</span></div>
+                    <p class="card-desc">早期的电视剧出演记录。</p>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-col">
+            <h4>关于本站</h4>
+            <ul>
+                <li><a href="#">资料来源说明</a></li>
+                <li><a href="#">艺人信息更新</a></li>
+                <li><a href="#">免责声明</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>热门分类</h4>
+            <ul>
+                <li><a href="#">朝美穗香作品</a></li>
+                <li><a href="#">日剧推荐</a></li>
+                <li><a href="#">特摄剧</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>快速链接</h4>
+            <ul>
+                <li><a href="#">艺人官网</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2023 朝美穗香作品资料库. All Rights Reserved. 本站为粉丝整理的非官方资料库。</p>
+    </div>
+</footer>
+
+</body>
+</html>
