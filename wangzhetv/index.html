@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="王者TV - 专业的王者荣耀电竞资讯与直播聚合平台，提供最新赛事动态、英雄攻略、主播直播及游戏周边资讯。">
+    <meta name="keywords" content="王者TV,王者荣耀,电竞资讯,游戏直播,王者荣耀攻略,王者荣耀赛事">
+    <title>王者TV-专业王者荣耀电竞资讯与直播聚合平台</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #FFD700;
+            --primary-hover: #FFC107;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --text-main: #333333;
+            --text-light: #666666;
+            --bg-body: #f4f6f9;
+            --bg-card: #ffffff;
+            --border-radius: 8px;
+            --spacing-unit: 16px;
+            --container-width: 1200px;
+            --header-height: 70px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-top: var(--header-height);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            height: var(--header-height);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-main);
+            font-size: 16px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://picsum.photos/seed/gamebg/1600/600') center/cover;
+            opacity: 0.2;
+            mix-blend-mode: overlay;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: none; /* Hidden on mobile */
+        }
+
+        /* Features / Sections */
+        section {
+            padding: 40px 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
+
+        .section-more {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .section-more:hover {
+            color: var(--primary-color);
+        }
+
+        /* Live Cards */
+        .live-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .live-card {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .live-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card-thumb {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background-color: #eee;
+        }
+
+        .card-thumb img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .card-body {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-meta {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .viewer-count {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .news-list-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .news-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-thumb {
+            width: 120px;
+            height: 80px;
+            border-radius: 4px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .news-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .news-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .news-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .news-title:hover {
+            color: var(--primary-color);
+        }
+
+        .news-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-date {
+            font-size: 12px;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        .sidebar-widget {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .widget-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-left: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .rank-list li {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .rank-list li:last-child {
+            border-bottom: none;
+        }
+
+        .rank-num {
+            width: 24px;
+            height: 24px;
+            background-color: #eee;
+            color: #666;
+            text-align: center;
+            line-height: 24px;
+            border-radius: 50%;
+            font-size: 12px;
+            margin-right: 12px;
+            font-weight: 700;
+        }
+
+        .rank-num.top-1 { background-color: #FFD700; color: #fff; }
+        .rank-num.top-2 { background-color: #C0C0C0; color: #fff; }
+        .rank-num.top-3 { background-color: #CD7F32; color: #fff; }
+
+        .rank-name {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: #ccc;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .hero-image {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none; /* Simplified for mobile demo */
+            }
+            
+            .hero-text h1 {
+                font-size: 32px;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .news-thumb {
+                width: 100px;
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <span>👑</span> 王者TV
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">赛事直播</a></li>
+                    <li><a href="#">主播推荐</a></li>
+                    <li><a href="#">英雄攻略</a></li>
+                    <li><a href="#">皮肤资讯</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="btn btn-primary">进入游戏</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>汇聚万千荣耀时刻<br>你的专属电竞视界</h1>
+                    <p>王者TV致力于提供最及时的王者荣耀KPL赛事直播、热门主播连麦互动以及深度的英雄出装攻略。随时随地，畅享峡谷乐趣。</p>
+                    <div style="display: flex; gap: 12px;">
+                        <a href="#" class="btn btn-primary">观看直播</a>
+                        <a href="#" class="btn btn-outline" style="border-color: white; color: white;">查看榜单</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://picsum.photos/seed/hero/600/400" alt="王者荣耀电竞场景" style="border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Section -->
+        <section class="container">
+            <div class="section-header">
+                <h2 class="section-title">正在热播</h2>
+                <a href="#" class="section-more">更多直播 &rarr;</a>
+            </div>
+            <div class="live-grid">
+                <!-- Live Card 1 -->
+                <article class="live-card">
+                    <div class="card-thumb">
+                        <span class="live-badge"><span class="live-dot"></span> 直播中</span>
+                        <img src="https://picsum.photos/seed/live1/400/225" alt="KPL季后赛直播">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">KPL秋季赛：重庆狼队 VS 成都AG超玩会</h3>
+                        <div class="card-meta">
+                            <span>官方赛事</span>
+                            <span class="viewer-count">👁 12.5万</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Live Card 2 -->
+                <article class="live-card">
+                    <div class="card-thumb">
+                        <span class="live-badge"><span class="live-dot"></span> 直播中</span>
+                        <img src="https://picsum.photos/seed/live2/400/225" alt="国服第一李白">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">国服第一李白：带你上王者！深夜冲分教学</h3>
+                        <div class="card-meta">
+                            <span>技术教学</span>
+                            <span class="viewer-count">👁 8.2万</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Live Card 3 -->
+                <article class="live-card">
+                    <div class="card-thumb">
+                        <span class="live-badge"><span class="live-dot"></span> 直播中</span>
+                        <img src="https://picsum.photos/seed/live3/400/225" alt="娱乐模式">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">五排开黑：欢乐匹配，输了发红包！</h3>
+                        <div class="card-meta">
+                            <span>娱乐互动</span>
+                            <span class="viewer-count">👁 5.1万</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Live Card 4 -->
+                <article class="live-card">
+                    <div class="card-thumb">
+                        <span class="live-badge"><span class="live-dot"></span> 直播中</span>
+                        <img src="https://picsum.photos/seed/live4/400/225" alt="解说复盘">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">职业选手复盘：这一波操作你给几分？</h3>
+                        <div class="card-meta">
+                            <span>精彩集锦</span>
+                            <span class="viewer-count">👁 3.4万</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- News & Sidebar Section -->
+        <section class="container">
+            <div class="news-grid">
+                <!-- Main News List -->
+                <div class="news-content">
+                    <div class="section-header" style="margin-bottom: 16px;">
+                        <h2 class="section-title">最新资讯</h2>
+                    </div>
+                    
+                    <article class="news-list-item">
+                        <div class="news-thumb">
+                            <img src="https://picsum.photos/seed/news1/200/133" alt="新皮肤发布">
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title"><a href="#">王者荣耀：全新限定皮肤“凤求凰·凤仪之诏”上线时间公布，内测资格获取方式</a></h3>
+                            <p class="news-desc">备受期待的年度限定皮肤终于要来了，传说品质特效炸裂，拥有专属回城语音...</p>
+                            <span class="news-date">2小时前 · 资讯</span>
+                        </div>
+                    </article>
+
+                    <article class="news-list-item">
+                        <div class="news-thumb">
+                            <img src="https://picsum.photos/seed/news2/200/133" alt="版本更新">
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title"><a href="#">S34赛季更新预告：野区经济调整，对抗路英雄迎来加强</a></h3>
+                            <p class="news-desc">官方今日发布S34赛季详细更新日志，多位英雄数值调整，平衡性改动解析...</p>
+                            <span class="news-date">5小时前 · 攻略</span>
+                        </div>
+                    </article>
+
+                    <article class="news-list-item">
+                        <div class="news-thumb">
+                            <img src="https://picsum.photos/seed/news3/200/133" alt="战队动态">
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title"><a href="#">KPL春季赛常规赛：青岛RW侠战队选手状态低迷，教练组宣布调整</a></h3>
+                            <p class="news-desc">近期比赛失利引发粉丝热议，战队管理层表示将进行人员轮换以应对接下来的挑战...</p>
+                            <span class="news-date">昨天 · 电竞</span>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Sidebar Widgets -->
+                <aside>
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">热门主播榜</h3>
+                        <ul class="rank-list">
+                            <li>
+                                <span class="rank-num top-1">1</span>
+                                <span class="rank-name">梦泪</span>
+                            </li>
+                            <li>
+                                <span class="rank-num top-2">2</span>
+                                <span class="rank-name">孤影</span>
+                            </li>
+                            <li>
+                                <span class="rank-num top-3">3</span>
+                                <span class="rank-name">国服第一韩信</span>
+                            </li>
+                            <li>
+                                <span class="rank-num">4</span>
+                                <span class="rank-name">花木兰·剑舞</span>
+                            </li>
+                            <li>
+                                <span class="rank-num">5</span>
+                                <span class="rank-name">AG超玩会·一诺</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget" style="margin-top: 24px;">
+                        <h3 class="widget-title">热门话题</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <a href="#" class="btn btn-outline" style="padding: 4px 10px; font-size: 12px; margin-bottom: 8px;">#KPL总决赛#</a>
+                            <a href="#" class="btn btn-outline" style="padding: 4px 10px; font-size: 12px; margin-bottom: 8px;">#李白出装#</a>
+                            <a href="#" class="btn btn-outline" style="padding: 4px 10px; font-size: 12px; margin-bottom: 8px;">#王者荣耀皮肤#</a>
+                            <a href="#" class="btn btn-outline" style="padding: 4px 10px; font-size: 12px; margin-bottom: 8px;">#排位上分#</a>
+                            <a href="#" class="btn btn-outline" style="padding: 4px 10px; font-size: 12px; margin-bottom: 8px;">#五杀时刻#</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Hero Banner Ad Placeholder -->
+        <section class="container" style="padding: 20px 0;">
+            <div style="width: 100%; height: 200px; background: linear-gradient(90deg, #4b6cb7, #182848); display: flex; align-items: center; justify-content: center; border-radius: 8px; color: white;">
+                <div style="text-align: center;">
+                    <h3 style="font-size: 24px; margin-bottom: 10px;">加入王者TV社区</h3>
+                    <p style="margin-bottom: 20px;">与百万玩家一起讨论英雄，组队开黑</p>
+                    <a href="#" class="btn btn-primary">立即注册</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hero Banner Ad Placeholder -->
+        <section class="container" style="padding: 20px 0;">
+            <div style="width: 100%; height: 200px; background: #333; display: flex; align-items: center; justify-content: center; border-radius: 8px; color: white; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('https://picsum.photos/seed/tech/1200/200') center/cover; opacity: 0.6;"></div>
+                <div style="position: relative; z-index: 2;">
+                    <h3 style="font-size: 24px; margin-bottom: 10px;">游戏助手下载</h3>
+                    <p style="margin-bottom: 20px;">获取最新英雄数据、装备推荐、出装模拟</p>
+                    <a href="#" class="btn btn-primary">下载APP</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>关于王者TV</h4>
+                    <p style="font-size: 14px; line-height: 1.8;">
+                        王者TV是国内领先的王者荣耀电竞内容平台，致力于为玩家提供最全面的赛事直播、攻略资讯和社区互动服务。我们热爱游戏，更热爱电竞精神。
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速导航</h4>
+                    <ul>
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">KPL赛事</a></li>
+                        <li><a href="#">主播大厅</a></li>
+                        <li><a href="#">英雄攻略</a></li>
+                        <li><a href="#">皮肤图鉴</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>帮助中心</h4>
+                    <ul>
+                        <li><a href="#">用户协议</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">侵权投诉</a></li>
+                        <li><a href="#">联系客服</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关注我们</h4>
+                    <p style="font-size: 14px; margin-bottom: 10px;">扫描二维码关注官方公众号</p>
+                    <div style="width: 100px; height: 100px; background: #444; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 12px;">QR Code</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 王者TV 版权所有 | 本站内容仅供娱乐参考</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+  </html>
