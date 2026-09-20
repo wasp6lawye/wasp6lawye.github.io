@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="私房菜美食 - 深度探索家庭私房菜的制作技艺、特色风味与选材心得。提供家常菜升级指南、私房菜食谱分享及餐饮经营建议。">
+    <meta name="keywords" content="私房菜美食,私房菜做法,家庭私房菜,特色私房菜,私房菜制作">
+    <title>私房菜美食-特色家常菜制作技艺与风味探索</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #d35400;
+            --secondary-color: #e67e22;
+            --bg-color: #fdfbf7;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-light: #7f8c8d;
+            --border-radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Layout */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--card-bg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--text-main);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -24px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-main);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #fdfbf7 0%, #fff3e0 100%);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(211, 84, 0, 0.1);
+            color: var(--primary-color);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Recipe Grid */
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .recipe-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+            background-color: #eee;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .recipe-card:hover .card-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .card-category {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 16px;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            border-top: 1px solid #f0f0f0;
+            padding-top: 12px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Feature Section */
+        .feature-section {
+            background-color: #fff;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .feature-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .feature-text p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+            text-align: justify;
+        }
+
+        .feature-list {
+            margin-bottom: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon {
+            background: #fff3e0;
+            color: var(--primary-color);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        .feature-item-content h4 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .feature-item-content p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .feature-image {
+            position: relative;
+        }
+
+        .feature-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* Guide/Steps */
+        .guide-section {
+            background-color: #fafafa;
+        }
+
+        .step-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .step-item {
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(211, 84, 0, 0.15);
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .step-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-content h3 {
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .step-content p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* FAQ */
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #fff;
+            margin-bottom: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            background: #fff;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: #fafafa;
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .footer-brand p {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 20px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .step-list {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 0;
+            }
+            nav ul {
+                margin-top: 15px;
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+                私房菜<span>美食</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">特色食谱</a></li>
+                    <li><a href="#">食材选购</a></li>
+                    <li><a href="#">烹饪技巧</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </nav>
+            <button class="search-btn" aria-label="搜索">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>私房菜美食：家的味道，独特的匠心</h1>
+                <p>探索隐藏在家庭厨房中的珍馐美味。从传统家常菜的现代改良，到极具地域特色的私房风味，我们分享每一道菜背后的故事与技巧。</p>
+                <div class="hero-tags">
+                    <span class="tag">#家常私房菜</span>
+                    <span class="tag">#特色风味</span>
+                    <span class="tag">#健康烹饪</span>
+                    <span class="tag">#食材甄选</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Recipes -->
+        <section id="recipes">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">热门私房菜谱</h2>
+                    <a href="#" class="view-all">查看全部食谱 &rarr;</a>
+                </div>
+                <div class="recipe-grid">
+                    <!-- Card 1 -->
+                    <article class="recipe-card">
+                        <div class="card-img-wrapper">
+                            <span class="card-category">热菜</span>
+                            <img src="https://picsum.photos/seed/food1/400/300" alt="红烧肉">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">家常红烧肉：肥而不腻的秘密</h3>
+                            <p class="card-desc">传统红烧肉的升级版做法，通过控制火候和糖色，让肉质软糯，入口即化，是年夜饭必备的硬菜。</p>
+                            <div class="card-meta">
+                                <span class="meta-item">⏱ 90分钟</span>
+                                <span class="meta-item">🔥 难度：中等</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="recipe-card">
+                        <div class="card-img-wrapper">
+                            <span class="card-category">汤羹</span>
+                            <img src="https://picsum.photos/seed/food2/400/300" alt="老鸭汤">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">老鸭冬瓜汤：滋补养生首选</h3>
+                            <p class="card-desc">选用土鸭与老冬瓜慢炖，汤色清亮，味道鲜美，具有清热解毒、滋阴补阳的功效。</p>
+                            <div class="card-meta">
+                                <span class="meta-item">⏱ 120分钟</span>
+                                <span class="meta-item">🔥 难度：简单</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="recipe-card">
+                        <div class="card-img-wrapper">
+                            <span class="card-category">凉菜</span>
+                            <img src="https://picsum.photos/seed/food3/400/300" alt="拍黄瓜">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">清爽拍黄瓜：夏日餐桌的解腻神器</h3>
+                            <p class="card-desc">简单的食材也能做出惊艳的味道，掌握蒜末和醋的比例，让这道凉菜成为开胃的绝佳选择。</p>
+                            <div class="card-meta">
+                                <span class="meta-item">⏱ 15分钟</span>
+                                <span class="meta-item">🔥 难度：简单</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 4 -->
+                    <article class="recipe-card">
+                        <div class="card-img-wrapper">
+                            <span class="card-category">主食</span>
+                            <img src="https://picsum.photos/seed/food4/400/300" alt="手工水饺">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">手工水饺：皮薄馅大的幸福</h3>
+                            <p class="card-desc">详细讲解和面、调馅、擀皮的全过程，教你包出形状完美、汁水丰盈的手工水饺。</p>
+                            <div class="card-meta">
+                                <span class="meta-item">⏱ 180分钟</span>
+                                <span class="meta-item">🔥 难度：困难</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section -->
+        <section class="feature-section">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-text">
+                        <h2>什么是私房菜？</h2>
+                        <p>私房菜，顾名思义，往往指的是在家庭厨房或小型餐馆中，由厨师或家庭主妇亲自掌勺，不拘泥于传统菜谱，融合个人创意与地方特色的菜肴。</p>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="feature-icon">1</div>
+                                <div class="feature-item-content">
+                                    <h4>食材讲究</h4>
+                                    <p>通常选用最新鲜、当季的食材，拒绝冷冻和添加剂。</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">2</div>
+                                <div class="feature-item-content">
+                                    <h4>口味独特</h4>
+                                    <p>融合百家之长，往往带有浓厚的个人风格或家族秘方。</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">3</div>
+                                <div class="feature-item-content">
+                                    <h4>情感连接</h4>
+                                    <p>每一道菜都承载着记忆与情感，是人与人之间温情的传递。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="view-all" style="display:inline-block;">了解更多关于私房菜文化 &rarr;</a>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://picsum.photos/seed/kitchen/600/400" alt="精致的私房菜烹饪场景">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cooking Guide -->
+        <section class="guide-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">私房菜制作指南</h2>
+                </div>
+                <div class="step-list">
+                    <div class="step-item">
+                        <span class="step-number">01</span>
+                        <div class="step-content">
+                            <h3>选材与处理</h3>
+                            <p>好的食材是成功的一半。学会如何挑选新鲜肉类、蔬菜，以及正确的清洗和腌制方法。</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">02</span>
+                        <div class="step-content">
+                            <h3>火候与调味</h3>
+                            <p>掌握中餐烹饪的核心——火候。何时大火爆炒，何时小火慢炖，以及如何精准把控盐和酱油的用量。</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">03</span>
+                        <div class="step-content">
+                            <h3>摆盘与呈现</h3>
+                            <p>私房菜不仅是味觉的享受，更是视觉的盛宴。学习简单的摆盘技巧，让家常菜也能上得了台面。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq-section container">
+            <div class="section-header">
+                <h2 class="section-title">常见问题</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>私房菜和家常菜有什么区别？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>家常菜通常指日常家庭日常制作的菜肴，注重实用和营养；而私房菜往往在家常菜的基础上，更注重食材的甄选、烹饪技巧的精进以及菜品的艺术呈现，带有一定的“半成品”或“精致化”属性。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>新手如何入门做私房菜？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>建议从简单的家常菜开始，比如番茄炒蛋、清炒时蔬等，先掌握基本的刀工和火候。随着熟练度提升，再尝试制作红烧肉、糖醋排骨等需要一定技巧的菜肴。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>做私房菜一定要昂贵的食材吗？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>并非如此。私房菜的核心在于“用心”和“技巧”。很多顶级食材如松露、和牛，如果烹饪不当也会大打折扣。相反，普通的豆腐、青菜，只要处理得当，同样可以做出惊艳的味道。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>私房菜美食</h3>
+                    <p>致力于分享家庭烹饪的乐趣与技巧，让每一顿饭都成为生活中的小确幸。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">食谱分类</a></li>
+                        <li><a href="#">食材商城</a></li>
+                        <li><a href="#">联系合作</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>烹饪分类</h4>
+                    <ul>
+                        <li><a href="#">热菜大全</a></li>
+                        <li><a href="#">凉菜拼盘</a></li>
+                        <li><a href="#">汤羹粥品</a></li>
+                        <li><a href="#">主食点心</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>订阅更新</h4>
+                    <p style="color:#bdc3c7; font-size:0.9rem; margin-bottom:10px;">获取最新食谱和烹饪技巧</p>
+                    <div style="display:flex; gap:5px;">
+                        <input type="email" placeholder="您的邮箱" style="padding:8px; border-radius:4px; border:none; width:100%;">
+                        <button style="padding:8px 12px; background:var(--primary-color); color:#fff; border:none; border-radius:4px; cursor:pointer;">订阅</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 私房菜美食网 版权所有 | 本站内容仅供学习交流，请勿用于商业用途。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+  </html>
