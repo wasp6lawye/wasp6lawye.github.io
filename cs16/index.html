@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cs1.6地图编辑器 - 专业关卡设计与制作工具指南</title>
+    <meta name="description" content="本站提供CS1.6地图编辑器 Hammer 的详细使用教程、工具介绍及插件下载。涵盖实体编辑、贴图技巧、脚本逻辑及地图发布流程，助您从零开始打造经典竞技地图。">
+    <meta name="keywords" content="cs1.6地图编辑器, Hammer编辑器, Counter-Strike 1.6 地图制作, CS1.6 地图下载, Hammer教程, 实体编辑">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --bg-dark: #121214;
+            --bg-card: #1e1e24;
+            --bg-header: rgba(18, 18, 20, 0.95);
+            --primary: #eab308;
+            --primary-hover: #ca8a04;
+            --text-main: #e1e1e6;
+            --text-muted: #a8a8b3;
+            --border: #2e2e36;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: var(--text-main); }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+
+        .cta-btn {
+            background-color: var(--primary);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--primary-hover);
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 5% 80px;
+            background: radial-gradient(circle at top center, #2a2a35 0%, var(--bg-dark) 70%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: white;
+            border: 1px solid var(--accent-blue);
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-card {
+            background-color: var(--bg-card);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .tool-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--accent-blue);
+        }
+
+        .tool-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .tool-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .tool-link {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Workflow Steps */
+        .workflow {
+            background-color: #161618;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .step-item {
+            flex: 1;
+            min-width: 280px;
+            position: relative;
+        }
+
+        .step-number {
+            display: inline-block;
+            background-color: var(--primary);
+            color: #000;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .step-item h3 {
+            margin-bottom: 15px;
+        }
+
+        .step-item ul {
+            padding-left: 20px;
+        }
+
+        .step-item li {
+            list-style-type: disc;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        /* Tutorials List */
+        .tutorial-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .tut-card {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .tut-thumb {
+            height: 160px;
+            background-color: #2a2a35;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 3rem;
+        }
+
+        .tut-content {
+            padding: 20px;
+        }
+
+        .tut-tag {
+            font-size: 0.75rem;
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .tut-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .tut-content p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background-color: var(--bg-card);
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: var(--text-muted);
+            display: none;
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-header);
+            padding: 60px 0 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--text-main);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { padding: 0 20px; }
+            nav { display: none; } /* Simplified for mobile */
+            .hero h1 { font-size: 2rem; }
+            .hero-actions { flex-direction: column; }
+            .btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M8 15l4 3 4-3"/></svg>
+            <span>Hammer</span>Studio
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#tools" class="active">工具介绍</a></li>
+                <li><a href="#workflow">制作流程</a></li>
+                <li><a href="#tutorials">教程资源</a></li>
+                <li><a href="#faq">常见问题</a></li>
+            </ul>
+        </nav>
+        <a href="#download" class="cta-btn">下载 Hammer</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>CS1.6 <span>地图编辑器</span> 完全指南</h1>
+                <p>Counter-Strike 1.6 核心关卡制作工具 Hammer Editor 详解。掌握实体编辑、贴图坐标、脚本逻辑与光照烘焙，打造属于你的竞技战场。</p>
+                <div class="hero-actions">
+                    <a href="#workflow" class="btn btn-primary">开始制作</a>
+                    <a href="#tutorials" class="btn btn-outline">查看教程</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="tools">
+            <div class="container">
+                <div class="section-title">
+                    <h2>核心工具面板</h2>
+                    <p>了解 Hammer 编辑器界面各部分功能</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon">🎨</div>
+                        <h3>2D 视图</h3>
+                        <p>用于管理贴图坐标、绘制地形结构。包含 XZ 平面（地形）、XY 平面（天花板/细节）和 YZ 平面（墙壁）。</p>
+                        <a href="#" class="tool-link">贴图坐标详解 &rarr;</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">🧱</div>
+                        <h3>实体面板</h3>
+                        <p>放置触发器、信息点、门、武器箱等可交互物体。核心在于正确设置 Class Name 和 KeyValues 属性。</p>
+                        <a href="#" class="tool-link">常用实体列表 &rarr;</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">💡</div>
+                        <h3>光照烘焙</h3>
+                        <p>将光照信息预渲染到贴图上，减少实时计算消耗，提升 CS1.6 地图的真实感和性能。</p>
+                        <a href="#" class="tool-link">光照设置教程 &rarr;</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">🔧</div>
+                        <h3>脚本逻辑</h3>
+                        <p>使用 PointTemplate 和 Logic entities 创建动态事件，如炸弹拆除计时器、重生点切换等。</p>
+                        <a href="#" class="tool-link">脚本逻辑基础 &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflow" class="workflow">
+            <div class="container">
+                <div class="section-title">
+                    <h2>标准制作流程</h2>
+                    <p>从零构建一个可游玩的 CS1.6 地图</p>
+                </div>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <span class="step-number">1</span>
+                        <h3>环境搭建</h3>
+                        <ul>
+                            <li>创建 Map 文件并设置世界坐标。</li>
+                            <li>使用 Vertex Tool 绘制基础地形。</li>
+                            <li>添加 Brush 并赋予材质。</li>
+                        </ul>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">2</span>
+                        <h3>实体放置</h3>
+                        <ul>
+                            <li>放置 Trigger_* 实体用于碰撞检测。</li>
+                            <li>放置 Info_player_* 实体作为出生点。</li>
+                            <li>设置 Func_door 等动态物体。</li>
+                        </ul>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">3</span>
+                        <h3>脚本与逻辑</h3>
+                        <ul>
+                            <li>连接逻辑门，设置 KeyValues 参数。</li>
+                            <li>配置武器掉落点。</li>
+                            <li>测试并修正逻辑错误。</li>
+                        </ul>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">4</span>
+                        <h3>发布与优化</h3>
+                        <ul>
+                            <li>执行 VVIS 和 VIS 计算。</li>
+                            <li>使用 BSP Compiler 生成 .bsp 文件。</li>
+                            <li>放入 cstrike/maps 目录。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tutorials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>精选学习资源</h2>
+                    <p>针对初学者的进阶技巧与避坑指南</p>
+                </div>
+                <div class="tutorial-list">
+                    <article class="tut-card">
+                        <div class="tut-thumb">🚪</div>
+                        <div class="tut-content">
+                            <span class="tut-tag">新手入门</span>
+                            <h3>如何正确设置门与铰链</h3>
+                            <p>门无法移动？实体没有方向？详解 func_door 和 func_door_rotating 的 KeyValues 设置技巧。</p>
+                            <a href="#" class="tool-link">阅读全文</a>
+                        </div>
+                    </article>
+                    <article class="tut-card">
+                        <div class="tut-thumb">💣</div>
+                        <div class="tut-content">
+                            <span class="tut-tag">爆破模式</span>
+                            <h3>C4 炸弹计时器逻辑实现</h3>
+                            <p>使用 PointTemplate 和 Logic entities 搭建标准的炸弹拆除流程，包含倒计时与拆除机制。</p>
+                            <a href="#" class="tool-link">阅读全文</a>
+                        </div>
+                    </article>
+                    <article class="tut-card">
+                        <div class="tut-thumb">🧲</div>
+                        <div class="tut-content">
+                            <span class="tut-tag">交互设计</span>
+                            <h3>触发器与信息点的应用</h3>
+                            <p>掌握 Trigger_multiple、Trigger_once 等触发器类型，实现复杂的区域交互与音效播放。</p>
+                            <a href="#" class="tool-link">阅读全文</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div class="container">
+                <div class="section-title">
+                    <h2>常见问题 (FAQ)</h2>
+                    <p>解决 CS1.6 地图编辑中的疑难杂症</p>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">Q: Hammer 编辑器无法启动或闪退怎么办？</div>
+                        <div class="faq-answer">A: 确保安装了 Steam 版 Counter-Strike 1.6。Hammer 通常位于 Steam 安装目录下的 cstrike 目录中。尝试以管理员权限运行，或重新安装 cstrike 目录。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q: 地图生成后没有贴图或颜色全黑？</div>
+                        <div class="faq-answer">A: 这通常是因为没有进行 VVIS 和 VIS 计算。在 Hammer 中点击 Map -> Map Information -> Compile，确保勾选了 VVIS 和 VIS，并点击 Run Map Compilation。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q: 如何在地图中添加自定义音效？</div>
+                        <div class="faq-answer">A: 将 .wav 音效文件放入 cstrike/sound 目录。在 Hammer 中放置 info_soundscape 实体或使用 Ambient_generic 实体，并在 KeyValues 中引用 sound 文件路径。</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>关于 HammerStudio</h4>
+                    <p style="color:var(--text-muted); font-size:0.9rem;">致力于为 CS1.6 地图制作者提供最专业的工具介绍与教程资源。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#">地图下载</a></li>
+                        <li><a href="#">模型库</a></li>
+                        <li><a href="#">脚本工具</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>相关资源</h4>
+                    <ul>
+                        <li><a href="#">Valve Hammer Editor 官方文档</a></li>
+                        <li><a href="#">Counter-Strike Wiki</a></li>
+                        <li><a href="#">Sven Co-op 官方文档</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 HammerStudio. All rights reserved. 本站为技术分享平台，非 Valve 官方站点。
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ 交互逻辑
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+
+        // 简单的导航高亮逻辑
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
