@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Eipril作品全集收录与深度鉴赏指南。包含《西行纪之悟空》、《星之海》、《深海》、《战双帕弥什》等经典视觉小说与插画作品介绍、角色分析、剧情解读及同人创作资源。">
+    <meta name="keywords" content="eipril作品, Eipril插画, 西行纪之悟空, 星之海, 深海, 视觉小说, 角色设计, 游戏原画">
+    <title>eipril作品-经典视觉小说与插画艺术鉴赏</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --bg-color: #0f1115;
+            --card-bg: #181b21;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --accent: #6c5ce7;
+            --accent-hover: #5649c0;
+            --border: #2d3436;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 60px 0;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(15, 17, 21, 0.95);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--text-main);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-sm {
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-sm:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e1e24 0%, #0f1115 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #a5a5a5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 90%;
+        }
+
+        .hero-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            background: rgba(108, 92, 231, 0.1);
+            color: var(--accent);
+            border-radius: 20px;
+            border: 1px solid rgba(108, 92, 231, 0.2);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Works Grid */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .work-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            group: card;
+        }
+
+        .work-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(108, 92, 231, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .work-thumb {
+            width: 100%;
+            height: 200px;
+            background-color: #2d3436;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .work-card:hover .work-thumb img {
+            transform: scale(1.05);
+        }
+
+        .work-info {
+            padding: 20px;
+        }
+
+        .work-category {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .work-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .work-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .work-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #666;
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+        }
+
+        .work-stats {
+            display: flex;
+            gap: 10px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Section Title */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 24px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        /* Featured Section */
+        .featured-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .featured-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .featured-media {
+            height: 350px;
+            background-color: #2d3436;
+        }
+        
+        .featured-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            padding: 30px;
+        }
+
+        .featured-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .featured-text {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .featured-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .featured-tags span {
+            font-size: 0.8rem;
+            color: #888;
+            background: #252a30;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        /* Sidebar List */
+        .sidebar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sidebar-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 6px;
+            background-color: #333;
+            flex-shrink: 0;
+        }
+
+        .sidebar-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .sidebar-info h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Info & Analysis Section */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .info-block h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .info-block p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .info-block ul {
+            list-style: disc;
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+
+        .info-block li {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0c0f;
+            border-top: 1px solid var(--border);
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 15px;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            color: var(--text-main);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #1f2228;
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                padding: 60px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 0;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                font-size: 0.85rem;
+            }
+
+            .featured-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <span>E</span>ipril<span>.art</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">作品全集</a></li>
+                    <li><a href="#gallery">画廊</a></li>
+                    <li><a href="#analysis">鉴赏分析</a></li>
+                    <li><a href="#about">关于作者</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-sm">登录</button>
+                <button class="btn-sm">订阅更新</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tags">
+                    <span class="tag">视觉小说</span>
+                    <span class="tag">插画艺术</span>
+                    <span class="tag">角色设计</span>
+                </div>
+                <h1>探索 Eipril 的奇幻视觉世界</h1>
+                <p>收录 Eipril 创作的核心视觉小说作品及高质量同人插画，深度解析《西行纪之悟空》、《星之海》等经典作品中的角色魅力与艺术风格。</p>
+                <a href="#gallery" class="btn-primary">浏览作品库</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Work -->
+    <section class="section-padding container" id="featured">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">精选推荐</h2>
+                <p class="section-subtitle">Eipril 最具代表性的视觉小说与同人创作</p>
+            </div>
+        </div>
+        
+        <div class="featured-layout">
+            <div class="featured-card">
+                <div class="featured-media">
+                    <img src="https://picsum.photos/seed/xinghailang/800/400" alt="星之海概念图">
+                </div>
+                <div class="featured-content">
+                    <span class="work-category">视觉小说 / 原创剧本</span>
+                    <h3 class="featured-title">《星之海》相关同人创作</h3>
+                    <p class="featured-text">
+                        《星之海》是 Eipril 在视觉小说领域的代表作之一。本页面展示的系列作品不仅还原了游戏中的唯美场景，更通过独特的色彩运用，展现了深海与星空交织的梦幻意境。作品细腻的人物刻画与宏大的世界观设定，深受玩家喜爱。
+                    </p>
+                    <div class="featured-tags">
+                        <span>深海</span><span>治愈系</span><span>角色二创</span><span>场景绘制</span>
+                    </div>
+                    <a href="#" class="btn-sm">查看详情 &rarr;</a>
+                </div>
+            </div>
+
+            <div class="sidebar-list">
+                <div class="sidebar-item">
+                    <div class="sidebar-thumb">
+                        <img src="https://picsum.photos/seed/wukong/150/150" alt="西行纪悟空">
+                    </div>
+                    <div class="sidebar-info">
+                        <h4>西行纪之悟空</h4>
+                        <p>经典角色二创</p>
+                    </div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-thumb">
+                        <img src="https://picsum.photos/seed/deepsea/150/150" alt="深海">
+                    </div>
+                    <div class="sidebar-info">
+                        <h4>深海系列</h4>
+                        <p>水彩风格插画</p>
+                    </div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-thumb">
+                        <img src="https://picsum.photos/seed/pandora/150/150" alt="战双帕弥什">
+                    </div>
+                    <div class="sidebar-info">
+                        <h4>战双帕弥什</h4>
+                        <p>机甲与废土风</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="section-padding container" id="gallery">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">作品画廊</h2>
+                <p class="section-subtitle">Eipril 完整作品列表与分类索引</p>
+            </div>
+        </div>
+
+        <div class="works-grid">
+            <!-- Card 1 -->
+            <article class="work-card">
+                <div class="work-thumb">
+                    <img src="https://picsum.photos/seed/hero1/400/300" alt="Eipril 作品预览">
+                </div>
+                <div class="work-info">
+                    <span class="work-category">视觉小说</span>
+                    <h3 class="work-title">《西行纪之悟空》</h3>
+                    <p class="work-desc">以《西行纪》为背景的角色设计图与剧情插画，展现悟空的桀骜与羁绊。</p>
+                    <div class="work-meta">
+                        <span>发布于 2023</span>
+                        <div class="work-stats">
+                            <span class="stat-item">♥ 1.2k</span>
+                            <span class="stat-item">👁 5k</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="work-card">
+                <div class="work-thumb">
+                    <img src="https://picsum.photos/seed/hero2/400/300" alt="Eipril 作品预览">
+                </div>
+                <div class="work-info">
+                    <span class="work-category">同人插画</span>
+                    <h3 class="work-title">《深海》系列</h3>
+                    <p class="work-desc">运用水彩技法绘制的深海场景，探讨孤独与救赎的主题。</p>
+                    <div class="work-meta">
+                        <span>发布于 2022</span>
+                        <div class="work-stats">
+                            <span class="stat-item">♥ 890</span>
+                            <span class="stat-item">👁 3.5k</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="work-card">
+                <div class="work-thumb">
+                    <img src="https://picsum.photos/seed/hero3/400/300" alt="Eipril 作品预览">
+                </div>
+                <div class="work-info">
+                    <span class="work-category">角色设定</span>
+                    <h3 class="work-title">《星之海》</h3>
+                    <p class="work-desc">游戏中的主要角色立绘与背景概念图，强调光影与氛围的营造。</p>
+                    <div class="work-meta">
+                        <span>发布于 2023</span>
+                        <div class="work-stats">
+                            <span class="stat-item">♥ 2.1k</span>
+                            <span class="stat-item">👁 8k</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="work-card">
+                <div class="work-thumb">
+                    <img src="https://picsum.photos/seed/hero4/400/300" alt="Eipril 作品预览">
+                </div>
+                <div class="work-info">
+                    <span class="work-category">概念设计</span>
+                    <h3 class="work-title">《战双帕弥什》</h3>
+                    <p class="work-desc">结合废土风格与机甲元素的角色设计，展现未来的战斗美学。</p>
+                    <div class="work-meta">
+                        <span>发布于 2021</span>
+                        <div class="work-stats">
+                            <span class="stat-item">♥ 1.5k</span>
+                            <span class="stat-item">👁 6k</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Analysis Section -->
+    <section class="section-padding" id="analysis">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">鉴赏与解析</h2>
+                    <p class="section-subtitle">Eipril 作品的艺术风格与技术特点</p>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-block">
+                    <h3>色彩与光影的运用</h3>
+                    <p>
+                        Eipril 的作品最显著的特点在于其对色彩的大胆运用。在《深海》系列中，她大量使用了蓝、青、紫等冷色调来表现深海的幽静与神秘；而在《星之海》中，则转而使用暖色调的星尘与光辉，营造出一种温暖而治愈的氛围。这种对冷暖色调的精准把控，使得画面具有很强的视觉冲击力。
+                    </p>
+                    <p>
+                        在光影处理上，Eipril 善于利用“边缘光”和“环境光遮蔽”来塑造物体的体积感。特别是在角色立绘中，细腻的皮肤质感与发丝的透明度处理，展现了极高的绘画功底。
+                    </p>
+                </div>
+                <div class="info-block">
+                    <h3>叙事性与角色塑造</h3>
+                    <p>
+                        不同于传统的商业插画，Eipril 的作品往往带有强烈的叙事性。通过角色的微表情、肢体动作以及背景环境的烘托，观者能够隐约感受到角色背后的故事。
+                    </p>
+                    <ul>
+                        <li><strong>情感表达：</strong> 角色眼神中的忧郁与坚定，往往比台词更能打动人心。</li>
+                        <li><strong>环境互动：</strong> 角色与周围环境的融合度极高，仿佛角色就生活在那个世界中。</li>
+                        <li><strong>风格统一：</strong> 无论是同人创作还是原创剧本，其视觉风格始终保持高度统一。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / FAQ -->
+    <section class="section-padding container" id="about">
+        <div class="section-header">
+            <h2 class="section-title">关于作者</h2>
+        </div>
+        <article class="info-block" style="background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid var(--border);">
+            <h3 style="margin-bottom: 15px;">Eipril 是谁？</h3>
+            <p>
+                Eipril 是一位活跃于同人圈与游戏美术领域的知名插画师与视觉小说创作者。她的作品多以二次元风格为主，擅长通过细腻的笔触和丰富的色彩来构建奇幻的世界观。Eipril 的作品深受《战双帕弥什》、《西行纪》等知名IP粉丝的喜爱，同时也推出了多部原创视觉小说剧本，在圈内拥有极高的人气。
+            </p>
+            <h3 style="margin-bottom: 15px; margin-top: 30px;">常见问题</h3>
+            <details style="margin-bottom: 10px; cursor: pointer;">
+                <summary style="padding: 10px 0; font-weight: 600; color: var(--text-main);">如何获取 Eipril 的最新作品？</summary>
+                <p style="margin-top: 10px; color: var(--text-muted);">建议关注作者在 Pixiv、微博或 Lofter 等社交平台的官方账号，以获取第一手发布信息。</p>
+            </details>
+            <details style="margin-bottom: 10px; cursor: pointer;">
+                <summary style="padding: 10px 0; font-weight: 600; color: var(--text-main);">这些作品是否可以商用？</summary>
+                <p style="margin-top: 10px; color: var(--text-muted);">本网站展示的作品均为同人创作或授权展示，严禁未经授权进行商业用途。具体请参阅各作品的版权声明。</p>
+            </details>
+        </article>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span>E</span>ipril<span>.art</span>
+                    </div>
+                    <p>
+                        致力于收录与分享 Eipril 的优秀视觉小说作品与同人插画，为粉丝提供一个纯净的鉴赏平台。
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>作品分类</h4>
+                    <ul>
+                        <li><a href="#">视觉小说</a></li>
+                        <li><a href="#">角色插画</a></li>
+                        <li><a href="#">场景概念</a></li>
+                        <li><a href="#">同人创作</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>相关资源</h4>
+                    <ul>
+                        <li><a href="#">Pixiv主页</a></li>
+                        <li><a href="#">微博账号</a></li>
+                        <li><a href="#">Lofter专栏</a></li>
+                        <li><a href="#">作品下载</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>联系方式</h4>
+                    <ul>
+                        <li><a href="#">投稿建议</a></li>
+                        <li><a href="#">商务合作</a></li>
+                        <li><a href="#">版权声明</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Eipril作品鉴赏站. All Rights Reserved. 本站仅作内容索引与展示，非官方网站。</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+  </html>
